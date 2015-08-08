@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup as bs
 import os, sys, logging, string, glob
 import cssutils as cu
 import json
-
+import ipdb
 ferr = open("errors_in_scraping.log","w")
 
 def parse_page(in_file, urlid):
@@ -117,20 +117,24 @@ def main(argv):
             os.makedirs(outputDirectory)
 
         cu.log.setLevel(logging.CRITICAL)
-        json_array, last_bucket = [], str(0)
+	json_array, last_bucket = [], str(0)
 
         fIn = glob.glob( inFolder + '/*/*raw*')
-
         for idx, filename in enumerate(fIn):
 
-            if idx % 10000 == 0:
+            if idx % 1000 == 0:
                 print "Processed %d HTML files" % idx
 
             filenameDetails = filename.split("/")
             urlId = filenameDetails[-1].split('_')[0]
             bucket = filenameDetails[-2]
-
-            if bucket != last_bucket:            
+            
+	    # PROBLEM SAVING BUCKETS:
+	    # because of how this is written, the last bucket will be parsed, but not saved.
+	    # for instance, if you had one bucket in the directory, that bucket would not be saved.
+	    # if you had 3 buckets in the directory, the first 2 would be saved but last wouldn't
+   	    # TEMPFIX: put a ipdb.set_trace() at the end, in case the json array is not saved
+	    if bucket != last_bucket:            
                 print 'SAVING BUCKET %s' % last_bucket
                 out_file = os.path.join(outputDirectory, 'chunk' + last_bucket + '.json')
 
@@ -150,7 +154,7 @@ def main(argv):
                 continue
 
             json_array.append(doc)
-            
+	import ipdb; ipdb.set_trace(); 
            
     print "Scraping completed .. There may be errors .. check log at errors_in_scraping.log"
 
