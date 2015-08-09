@@ -1,0 +1,67 @@
+PROGRESS: Finished parsing file /home/rlouie/repos/dato-native/processed_data/chunk0.json
+PROGRESS: Parsing completed. Parsed 100 lines in 1.43956 secs.
+------------------------------------------------------
+Inferred types from first line of file as 
+column_type_hints=[dict]
+If parsing fails due to incorrect types, you can correct
+the inferred type list above and pass it to read_csv in
+the column_type_hints argument
+------------------------------------------------------
+PROGRESS: Read 2213 lines. Lines per second: 895.341
+PROGRESS: Read 8911 lines. Lines per second: 1079.48
+PROGRESS: Read 16413 lines. Lines per second: 1167.76
+PROGRESS: Read 23831 lines. Lines per second: 1176.58
+PROGRESS: Read 31080 lines. Lines per second: 1222.06
+PROGRESS: Read 37781 lines. Lines per second: 1206.11
+PROGRESS: Read 45029 lines. Lines per second: 1201.96
+PROGRESS: Read 51894 lines. Lines per second: 1188.88
+PROGRESS: Read 58974 lines. Lines per second: 1191.86
+PROGRESS: Read 65771 lines. Lines per second: 1195.9
+PROGRESS: Finished parsing file /home/rlouie/repos/dato-native/processed_data/chunk0.json
+PROGRESS: Parsing completed. Parsed 67507 lines in 55.2616 secs.
+PROGRESS: Finished parsing file /home/rlouie/repos/dato-native/data/train.csv
+PROGRESS: Parsing completed. Parsed 100 lines in 0.212416 secs.
+------------------------------------------------------
+Inferred types from first line of file as 
+column_type_hints=[str,int]
+If parsing fails due to incorrect types, you can correct
+the inferred type list above and pass it to read_csv in
+the column_type_hints argument
+------------------------------------------------------
+PROGRESS: Finished parsing file /home/rlouie/repos/dato-native/data/train.csv
+PROGRESS: Parsing completed. Parsed 101107 lines in 0.11789 secs.
+PROGRESS: Finished parsing file /home/rlouie/repos/dato-native/data/sampleSubmission.csv
+PROGRESS: Parsing completed. Parsed 100 lines in 0.487424 secs.
+------------------------------------------------------
+Inferred types from first line of file as 
+column_type_hints=[str,int]
+If parsing fails due to incorrect types, you can correct
+the inferred type list above and pass it to read_csv in
+the column_type_hints argument
+------------------------------------------------------
+PROGRESS: Finished parsing file /home/rlouie/repos/dato-native/data/sampleSubmission.csv
+PROGRESS: Parsing completed. Parsed 235917 lines in 0.202576 secs.
+PROGRESS: Creating a validation set from 5 percent of training data. This may take a while.
+          You can set ``validation_set=None`` to disable validation tracking.
+
+PROGRESS: Logistic regression:
+PROGRESS: --------------------------------------------------------
+PROGRESS: Number of examples          : 19173
+PROGRESS: Number of classes           : 2
+PROGRESS: Number of feature columns   : 1
+PROGRESS: Number of unpacked features : 452597
+PROGRESS: Number of coefficients    : 452598
+PROGRESS: Starting L-BFGS
+PROGRESS: --------------------------------------------------------
+PROGRESS: +-----------+----------+-----------+--------------+-------------------+---------------------+
+PROGRESS: | Iteration | Passes   | Step size | Elapsed Time | Training-accuracy | Validation-accuracy |
+PROGRESS: +-----------+----------+-----------+--------------+-------------------+---------------------+
+PROGRESS: | 1         | 3        | 0.000052  | 2.089698     | 0.682835          | 0.535714            |
+PROGRESS: | 2         | 5        | 1.000000  | 3.118383     | 0.980546          | 0.892857            |
+PROGRESS: | 3         | 6        | 1.000000  | 3.649882     | 0.983518          | 0.894737            |
+PROGRESS: | 4         | 7        | 1.000000  | 4.243944     | 0.986909          | 0.896617            |
+PROGRESS: | 5         | 8        | 1.000000  | 4.922802     | 0.986909          | 0.900376            |
+PROGRESS: | 6         | 9        | 1.000000  | 5.600038     | 0.988056          | 0.904135            |
+PROGRESS: | 10        | 13       | 1.000000  | 8.231323     | 0.988056          | 0.897556            |
+PROGRESS: +-----------+----------+-----------+--------------+-------------------+---------------------+
+[INFO] Stopping the server connection.

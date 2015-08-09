@@ -1,0 +1,61 @@
+PROGRESS: Finished parsing file /home/rlouie/repos/dato-native/processed_data/chunk0.json
+PROGRESS: Parsing completed. Parsed 100 lines in 1.03065 secs.
+------------------------------------------------------
+Inferred types from first line of file as 
+column_type_hints=[dict]
+If parsing fails due to incorrect types, you can correct
+the inferred type list above and pass it to read_csv in
+the column_type_hints argument
+------------------------------------------------------
+PROGRESS: Read 2213 lines. Lines per second: 1777.66
+PROGRESS: Read 12607 lines. Lines per second: 1982.72
+PROGRESS: Read 23831 lines. Lines per second: 2060.58
+PROGRESS: Read 34439 lines. Lines per second: 2047.93
+PROGRESS: Read 45029 lines. Lines per second: 1908.31
+PROGRESS: Read 53684 lines. Lines per second: 1872.66
+PROGRESS: Read 64077 lines. Lines per second: 1904.69
+PROGRESS: Finished parsing file /home/rlouie/repos/dato-native/processed_data/chunk0.json
+PROGRESS: Parsing completed. Parsed 67507 lines in 34.6393 secs.
+PROGRESS: Finished parsing file /home/rlouie/repos/dato-native/data/train.csv
+PROGRESS: Parsing completed. Parsed 100 lines in 0.099435 secs.
+------------------------------------------------------
+Inferred types from first line of file as 
+column_type_hints=[str,int]
+If parsing fails due to incorrect types, you can correct
+the inferred type list above and pass it to read_csv in
+the column_type_hints argument
+------------------------------------------------------
+PROGRESS: Finished parsing file /home/rlouie/repos/dato-native/data/train.csv
+PROGRESS: Parsing completed. Parsed 101107 lines in 0.073462 secs.
+PROGRESS: Finished parsing file /home/rlouie/repos/dato-native/data/sampleSubmission.csv
+PROGRESS: Parsing completed. Parsed 100 lines in 0.230667 secs.
+------------------------------------------------------
+Inferred types from first line of file as 
+column_type_hints=[str,int]
+If parsing fails due to incorrect types, you can correct
+the inferred type list above and pass it to read_csv in
+the column_type_hints argument
+------------------------------------------------------
+PROGRESS: Finished parsing file /home/rlouie/repos/dato-native/data/sampleSubmission.csv
+PROGRESS: Parsing completed. Parsed 235917 lines in 0.118507 secs.
+PROGRESS: Creating a validation set from 5 percent of training data. This may take a while.
+          You can set ``validation_set=None`` to disable validation tracking.
+
+PROGRESS: Logistic regression:
+PROGRESS: --------------------------------------------------------
+PROGRESS: Number of examples          : 19232
+PROGRESS: Number of classes           : 2
+PROGRESS: Number of feature columns   : 1
+PROGRESS: Number of unpacked features : 300
+PROGRESS: Number of coefficients    : 301
+PROGRESS: Starting Newton Method
+PROGRESS: --------------------------------------------------------
+PROGRESS: +-----------+----------+--------------+-------------------+---------------------+
+PROGRESS: | Iteration | Passes   | Elapsed Time | Training-accuracy | Validation-accuracy |
+PROGRESS: +-----------+----------+--------------+-------------------+---------------------+
+PROGRESS: | 1         | 2        | 12.303720    | 0.663582          | 0.664677            |
+PROGRESS: | 2         | 3        | 18.109800    | 0.681988          | 0.686567            |
+PROGRESS: | 3         | 4        | 23.845002    | 0.687240          | 0.690547            |
+PROGRESS: | 4         | 5        | 29.781446    | 0.688280          | 0.692537            |
+PROGRESS: | 5         | 6        | 35.480370    | 0.688072          | 0.692537            |
+PROGRESS: +-----------+----------+--------------+-------------------+---------------------+

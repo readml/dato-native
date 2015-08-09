@@ -2,8 +2,18 @@
 
 Creating the good features to be used in the SFrame
 """
+# common python
+import os
+import csv
+import pandas as pd
+import numpy as np
+
+# graphlab
 import graphlab as gl
 from graphlab.toolkits.feature_engineering import TFIDF
+
+# local imports
+from config import GLOVE_FOLDER
 
 class TFIDFTransformer(object):
     """ Wrapper around GraphLabs bag of words and TFIDF models to act
@@ -58,3 +68,38 @@ class TFIDFTransformer(object):
         test['bow'] = bow_tst
 
         return self.encoder.transform(test)
+
+class GloveTransformer(object):
+
+    def __init__(self, glove_file, nrows=50000):
+        data_path = os.path.join(GLOVE_FOLDER, glove_file)
+        raw = pd.read_csv(data_path, header=None, sep=' ', quoting=csv.QUOTE_NONE, nrows=nrows)
+        keys = raw[0].values
+        self.vectors = raw[range(1, len(raw.columns))].values
+        self.vector_dim = self.vectors.shape[1]
+
+        # lookup will have (key, val) -> (word-string, row index in self.vectors)
+        row_indexes = range(self.vectors.shape[0])
+        self.lookup = dict(zip(keys, row_indexes))
+        self.reverse_lookup = dict(zip(row_indexes, keys))
+
+    def txt2vectors(self, txt):
+        """ Calculate the list of vector representations for words in txt """
+        words = txt.split(' ')
+        words = [word.lower() for word in words]
+        word_seq_vect = []
+        for word in words:
+            if word in self.lookup:
+                word_seq_vect.append(self.vectors[self.lookup[word]])
+            else:
+                # random values for UNK tokens
+                word_seq_vect.append(np.random.rand(self.vector_dim))
+        word_seq_vect = np.vstack(word_seq_vect)
+        return word_seq_vect
+
+    def txt2avg_vector(self, txt):
+        """ Calculate the average vector representation of the input text """
+        vectors = self.txt2vectors(txt)
+        avg_vector = np.mean(vectors, axis=0)
+        avg_vector = np.nan_to_num(avg_vector)
+        return avg_vector
