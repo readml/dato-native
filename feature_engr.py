@@ -19,8 +19,8 @@ class TFIDFTransformer(object):
     """ Wrapper around GraphLabs bag of words and TFIDF models to act
     more like a scikit estimator """
 
-    def __init__(self):
-        pass
+    def __init__(self, column_name):
+        self.column_name = column_name
 
     def fit_transform(self, train):
         """ unlike scikit, features and targets are encapsulated in the 
@@ -36,15 +36,15 @@ class TFIDFTransformer(object):
             in column 'tfidf'.
         """
         # create word counts and remove countwords
-        bow_trn = gl.text_analytics.count_words(train['text_clean'])
+        bow_trn = gl.text_analytics.count_words(train[self.column_name])
         bow_trn = bow_trn.dict_trim_by_keys(gl.text_analytics.stopwords())
         
         # add bag of words to sframe
-        train['bow'] = bow_trn
+        train['bow_'+self.column_name] = bow_trn
         
         self.encoder = gl.feature_engineering.create(
               train
-            , TFIDF('bow', output_column_name='tfidf')
+            , TFIDF('bow_'+self.column_name, output_column_name='tfidf_'+self.column_name)
             )
         
         return self.encoder.transform(train)
@@ -61,11 +61,11 @@ class TFIDFTransformer(object):
             in column 'tfidf'.
         """
         # create word counts and remove countwords
-        bow_tst = gl.text_analytics.count_words(test['text_clean'])
+        bow_tst = gl.text_analytics.count_words(test[self.column_name])
         bow_tst = bow_tst.dict_trim_by_keys(gl.text_analytics.stopwords())
 
         # add the bag of words to both sframes
-        test['bow'] = bow_tst
+        test['bow_'+self.column_name] = bow_tst
 
         return self.encoder.transform(test)
 

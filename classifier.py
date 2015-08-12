@@ -15,14 +15,22 @@ train, test = get_train_test()
 train =  process_dataframe(train)
 test = process_dataframe(test)
 
-# Continue Bag Of Word Text Vectors
-glovet = GloveTransformer("glove.6B.%sd.txt.gz" % 300)
-train['glove'] = train['text_clean'].apply(lambda x: glovet.txt2avg_vector(x))
-test['glove'] = test['text_clean'].apply(lambda x: glovet.txt2avg_vector(x))
+# tfidf on text_clean
+tfidf = TFIDFTransformer('text_clean')
+train = tfidf.fit_transform(train)
+test = tfidf.transform(test)
+
+# tfidf on network locations
+tfidf = TFIDFTransformer('netlocs')
+train = tfidf.fit_transform(train)
+test = tfidf.transform(test)
 
 # train logistic regression on training data with tf-idf as features and predict on testing data
 train = train.dropna()
-model = gl.logistic_classifier.create(train, target='sponsored', features=['glove'], class_weights='auto')
+model = gl.logistic_classifier.create(
+    train, target='sponsored', features=['tfidf_text_clean', 'tfidf_netlocs'],
+    class_weights='auto'
+)
 
 test = test.dropna()
 model.evaluate(test)

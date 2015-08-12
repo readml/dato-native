@@ -3,6 +3,7 @@
 Extract, Transform, Load data into the proper format
 """
 import re
+from urlparse import urlparse
 import graphlab as gl
 from config import PATH_TO_JSON, PATH_TO_TRAIN_LABELS, PATH_TO_TEST_LABELS
 
@@ -42,10 +43,24 @@ def clean_text(sf):
     sf['text_clean'] = sf['text_clean'].apply(lambda x: x.strip())
     return sf
 
+def create_link_netloc(sf):
+    """ a simple method to extract the net(work) loc(ations) in url links """
+    def get_netloc(link):
+        try:
+            return urlparse(link).netloc
+        except:
+            return ''
+
+    sf["netlocs"] = sf["links"].apply(
+        lambda x: ' '.join([get_netloc(link) for link in x])
+    ) 
+    return sf
+
 def process_dataframe(sf):
     """ a wrapper method around the 2 methods above """
     sf = clean_text(sf)
     sf = create_count_features(sf)
+    sf = create_link_netloc(sf)
     return sf
 
 def create_submission(test, ypred):
