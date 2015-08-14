@@ -63,9 +63,17 @@ def process_dataframe(sf):
     sf = create_link_netloc(sf)
     return sf
 
-def create_submission(test, ypred):
+def create_balanced_validation(train, target_name="sponsored", n_positive_examples=1000):
+    """ supports the case whene the target is binary """
+    train = gl.toolkits.cross_validation.shuffle(train)
+    neg_valid = train[(train['sponsored'] == 0)][:1000]
+    pos_valid = train[(train['sponsored'] == 1)][:1000]
+    valid = neg_valid.append(pos_valid)
+    return valid
+
+def create_submission(test, ypred, name="data/submission_version_1.csv"):
     """ create submission.csv """
     submission = gl.SFrame()
     submission['sponsored'] = ypred 
     submission['file'] = test['id'].apply(lambda x: x + '_raw_html.txt')
-    submission.save('submission_version_1.csv', format='csv')
+    submission.save(name, format='csv')
